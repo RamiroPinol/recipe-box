@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import ModalPanel from './components/ModalPanel';
 import RecipesContainer from './components/RecipesContainer';
 import { getRecipes, addRecipe, deleteRecipe } from './storageAPI';
+import { Button } from 'react-bootstrap';
 
 class Main extends Component {
   constructor(props) {
@@ -24,13 +26,18 @@ class Main extends Component {
   // Function used to add a recipe. Both name and ingr should be strings
   onRecipeAdd(name, ingr) {
     const recipeObj = {
-      id: Date.now(),
+      id: Date.now().toString(),
       name,
-      ingredients: [...ingr.replace(/\s+/g, '').split(',')]
+      ingredients: [...ingr.split(',').filter(igr => igr.length).map(igr => igr.trim())]
     }
 
     addRecipe(recipeObj);
     this.setState({ recipes: [...getRecipes()] });
+  }
+
+  onRecipeEdit() {
+    // Function for edit recipe. Should populate addRecipe modal with recipe info
+    // and replace recipe if a value changes (do nothing if no changes)
   }
 
   handleInputSubmit(event) {
@@ -44,17 +51,7 @@ class Main extends Component {
       <div className="Main">
         <Header />
 
-        <form onSubmit={this.handleInputSubmit}>
-          <label>
-            Name:
-            <input type="text" name="name" />
-          </label>
-          <label>
-            Ingredients:
-            <input type="text" name="ingredients" />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <ModalPanel onSubmit={this.handleInputSubmit}/>
 
         <RecipesContainer
           recipes={this.state.recipes}
