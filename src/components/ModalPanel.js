@@ -1,69 +1,56 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Modal, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
-class ModalPanel extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showModal: false,
-    }
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
+function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
+
+  function newRecipe() {
+    toggle();
+    clear();
   }
 
-  open(){
-    this.setState({ showModal: true });
-  }
+  return (
+    <div>
+      <Button onClick={newRecipe} bsStyle="primary">Add recipe</Button>
 
-  close() {
-    this.setState({ showModal: false });
-  }
+      <Modal
+        show={show}
+        onHide={toggle}
+        aria-labelledby="ModalHeader"
+      >
+        <form onSubmit={onSubmit}>
+          <Modal.Body>
 
-  render() {
-    return (
-      <div>
-        <Button onClick={this.open} bsStyle="primary">Add recipe</Button>
+            <FormGroup controlId="formControlName">
+              <ControlLabel>Name</ControlLabel>
+              <FormControl
+                type="text"
+                name="name"
+                defaultValue={name}
+                placeholder="Enter recipe name"
+              />
+            </FormGroup>
 
-        <Modal
-          show={this.state.showModal}
-          onHide={this.close}
-          aria-labelledby="ModalHeader"
-        >
-          <form onSubmit={this.props.onSubmit}>
-            <Modal.Body>
+            <FormGroup controlId="formControlIngredient">
+              <ControlLabel>Ingredients</ControlLabel>
+              <FormControl
+                type="text"
+                name="ingredients"
+                defaultValue={ingrs}
+                placeholder="Enter ingredients"
+              />
+              <HelpBlock>Separate ingredients with commas</HelpBlock>
+            </FormGroup>
 
-              <FormGroup controlId="formControlName">
-                <ControlLabel>Name</ControlLabel>
-                <FormControl
-                  type="text"
-                  name="name"
-                  // value={this.state.value}
-                  placeholder="Enter recipe name"
-                />
-              </FormGroup>
+          </Modal.Body>
 
-              <FormGroup controlId="formControlIngredient">
-                <ControlLabel>Ingredients</ControlLabel>
-                <FormControl
-                  type="text"
-                  name="ingredients"
-                  // value={this.state.value}
-                  placeholder="Enter ingredients"
-                />
-                <HelpBlock>Separate ingredients with commas</HelpBlock>
-              </FormGroup>
-
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button type="submit" bsStyle="primary" onClick={this.close}>Add Recipe</Button>
-              <Button bsStyle="danger" onClick={this.close}>Cancel</Button>
-            </Modal.Footer>
-          </form>
-        </Modal>
-      </div>
-    )
-  }
+          <Modal.Footer>
+            <Button type="submit" bsStyle="primary" onClick={toggle}>Add Recipe</Button>
+            <Button bsStyle="danger" onClick={toggle}>Cancel</Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
+    </div>
+  )
 }
 
 export default ModalPanel;

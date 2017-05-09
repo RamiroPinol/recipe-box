@@ -1,7 +1,7 @@
 import React from 'react';
 import Recipe from './Recipe';
 
-function RecipesContainer({ recipes, deleteRecipe }) {
+function RecipesContainer({ recipes, deleteRecipe, editRecipe}) {
   return (
     <div className="recipes">
       {recipes.map( recipe => {
@@ -11,6 +11,7 @@ function RecipesContainer({ recipes, deleteRecipe }) {
           name={recipe.name}
           ingredients={recipe.ingredients}
           deleteRecipe={deleteRecipe}
+          editRecipe={editRecipe}
         />
       })}
     </div>

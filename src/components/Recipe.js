@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Recipe({ id, name, ingredients, deleteRecipe }) {
+function Recipe({ id, name, ingredients, deleteRecipe, editRecipe }) {
   return (
     <div>
       <div className="recipeHeader">{name}</div>
@@ -9,7 +9,7 @@ function Recipe({ id, name, ingredients, deleteRecipe }) {
           {ingredients.map( (ingr, index) => <li key={index}>{ingr}</li>)}
         </ul>
       </div>
-      <button>Edit</button>
+      <button onClick={ () => editRecipe(name, ingredients, id) }>Edit</button>
       <button onClick={ () => deleteRecipe(id) }>DELETE</button>
     </div>
   )
