@@ -71,7 +71,7 @@ class Main extends Component {
 
     // Check for unchanged info submit
     } else if (name === this.state.modalNameVal && ingrs === this.state.modalIngrVal) {
-      toastr.warning("No changes, nothing added.");
+      toastr.warning("No changes, nothing edited.");
 
     // If editing a recipe (modalNameVal & modalIngrVal != "")
     } else if (this.state.modalNameVal !== "" && this.state.modalIngrVal !== "") {

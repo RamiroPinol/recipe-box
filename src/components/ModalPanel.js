@@ -10,7 +10,12 @@ function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
 
   return (
     <div>
-      <Button onClick={newRecipe} bsStyle="primary">Add recipe</Button>
+      <Button
+        className="addRecipeBtn"
+        onClick={newRecipe}
+        bsStyle="primary">
+        Add recipe
+      </Button>
 
       <Modal
         show={show}

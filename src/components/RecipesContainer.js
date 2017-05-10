@@ -3,7 +3,8 @@ import Recipe from './Recipe';
 
 function RecipesContainer({ recipes, deleteRecipe, editRecipe}) {
   return (
-    <div className="recipes">
+    <div className="container recipes">
+      {/* <div className="row"> */}
       {recipes.map( recipe => {
         return <Recipe
           key={recipe.id}
@@ -14,6 +15,7 @@ function RecipesContainer({ recipes, deleteRecipe, editRecipe}) {
           editRecipe={editRecipe}
         />
       })}
+      {/* </div> */}
     </div>
   )
 }
