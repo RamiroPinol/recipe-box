@@ -6,7 +6,7 @@ function Header() {
       <h2>RP FCC Recipe Box</h2>
       <p>Coded by <a href="https://ramiropinol.github.io/">Ramiro Piñol</a>. Repo on <a href="https://github.com/RamiroPinol/camper-leaderboard">Github</a></p>
     </header>
-  )
+  );
 }
 
 export default Header;

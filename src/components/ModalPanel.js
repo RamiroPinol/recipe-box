@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
 function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
-
   function newRecipe() {
     toggle();
     clear();
@@ -13,8 +13,8 @@ function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
       <Button
         className="addRecipeBtn"
         onClick={newRecipe}
-        bsStyle="primary">
-        Add recipe
+        bsStyle="primary"
+      >Add recipe
       </Button>
 
       <Modal
@@ -55,7 +55,16 @@ function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
         </form>
       </Modal>
     </div>
-  )
+  );
 }
+
+ModalPanel.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  show: PropTypes.func.isRequired,
+  ingrs: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
+};
 
 export default ModalPanel;

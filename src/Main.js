@@ -12,10 +12,10 @@ class Main extends Component {
     this.state = {
       recipes: [...getRecipes()],
       showModal: false,
-      modalNameVal: "",
-      modalIngrVal: "",
-      editingRecipeId: "",
-    }
+      modalNameVal: '',
+      modalIngrVal: '',
+      editingRecipeId: '',
+    };
 
     this.onRecipeDelete = this.onRecipeDelete.bind(this);
     this.onRecipeAdd = this.onRecipeAdd.bind(this);
@@ -26,7 +26,7 @@ class Main extends Component {
   }
 
   onRecipeDelete(id) {
-    deleteRecipe(id); //delete recipe from localStorage
+    deleteRecipe(id); // Delete recipe from localStorage
     this.setState({ recipes: [...getRecipes()] });
   }
 
@@ -35,19 +35,11 @@ class Main extends Component {
     const recipeObj = {
       id: Date.now().toString(),
       name,
-      ingredients: [...ingr.split(',').filter(igr => igr.length).map(igr => igr.trim())]
-    }
+      ingredients: [...ingr.split(',').filter(igr => igr.length).map(igr => igr.trim())],
+    };
 
     addRecipe(recipeObj);
     this.setState({ recipes: [...getRecipes()] });
-  }
-
-  toggleModalShow() {
-    this.setState({ showModal: !this.state.showModal });
-  }
-
-  clearModalFields() {
-    this.setState({ modalNameVal: "", modalIngrVal: "" });
   }
 
   // Function for set state when editing recipe.
@@ -61,28 +53,35 @@ class Main extends Component {
     this.toggleModalShow();
   }
 
+  toggleModalShow() {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
+  clearModalFields() {
+    this.setState({ modalNameVal: '', modalIngrVal: '' });
+  }
+
   handleInputSubmit(event) {
     const [name, ingrs] = [event.target.name.value, event.target.ingredients.value];
     event.preventDefault();
 
     // Check for empty fields
     if (!name || !ingrs) {
-      toastr.warning("Empty field, nothing added.");
+      toastr.warning('Empty field, nothing added.');
 
     // Check for unchanged info submit
     } else if (name === this.state.modalNameVal && ingrs === this.state.modalIngrVal) {
-      toastr.warning("No changes, nothing edited.");
+      toastr.warning('No changes, nothing edited.');
 
-    // If editing a recipe (modalNameVal & modalIngrVal != "")
-    } else if (this.state.modalNameVal !== "" && this.state.modalIngrVal !== "") {
+    // If editing a recipe (modalNameVal & modalIngrVal != '')
+    } else if (this.state.modalNameVal !== '' && this.state.modalIngrVal !== '') {
       this.onRecipeAdd(name, ingrs); // Add new recipe
       this.onRecipeDelete(this.state.editingRecipeId); // Delete old recipe
-      toastr.success("Recipe successfully edited!");
-
+      toastr.success('Recipe successfully edited!');
     } else {
       this.onRecipeAdd(name, ingrs);
       this.setState({ recipes: [...getRecipes()] }); // Get updated data
-      toastr.success("New recipe added!");
+      toastr.success('New recipe added!');
     }
   }
 
