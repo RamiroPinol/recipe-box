@@ -9,16 +9,15 @@ function RecipesContainer({ recipes, deleteRecipe, editRecipe }) {
   return (
     <div className="container recipes">
       <div className="row">
-        {sortedRecipes.map((recipe) => {
-          return (
-            <Recipe
-              id={recipe.id}
-              name={recipe.name}
-              ingredients={recipe.ingredients}
-              deleteRecipe={deleteRecipe}
-              editRecipe={editRecipe}
-            />);
-        })}
+        {sortedRecipes.map(recipe =>
+          <Recipe
+            key={recipe.id}
+            id={recipe.id}
+            name={recipe.name}
+            ingredients={recipe.ingredients}
+            deleteRecipe={deleteRecipe}
+            editRecipe={editRecipe}
+          />)}
       </div>
     </div>
   );
@@ -27,7 +26,7 @@ function RecipesContainer({ recipes, deleteRecipe, editRecipe }) {
 RecipesContainer.propTypes = {
   deleteRecipe: PropTypes.func.isRequired,
   editRecipe: PropTypes.func.isRequired,
-  recipes: PropTypes.arrayOf.isRequired,
+  recipes: PropTypes.array.isRequired,
 };
 
 export default RecipesContainer;

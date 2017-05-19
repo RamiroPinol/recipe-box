@@ -9,7 +9,7 @@ function Recipe({ id, name, ingredients, deleteRecipe, editRecipe }) {
         <Panel header={name} eventKey={id}>
           <div className="ingredients">
             <ul>
-              {ingredients.map(ingr => <li key={id}>{ingr}</li>)}
+              {ingredients.map(ingr => <li key={`${id}${ingr}`}>{ingr}</li>)}
             </ul>
           </div>
           <Button
@@ -33,7 +33,7 @@ Recipe.propTypes = {
   editRecipe: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 export default Recipe;

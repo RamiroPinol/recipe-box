@@ -4,7 +4,7 @@ function Header() {
   return (
     <header>
       <h2>RP FCC Recipe Box</h2>
-      <p>Coded by <a href="https://ramiropinol.github.io/">Ramiro Piñol</a>. Repo on <a href="https://github.com/RamiroPinol/camper-leaderboard">Github</a></p>
+      <p>Coded by <a href="https://ramiropinol.github.io/">Ramiro Piñol</a>. Repo on <a href="https://github.com/RamiroPinol/recipe-box">Github</a></p>
     </header>
   );
 }

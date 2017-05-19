@@ -13,7 +13,6 @@ function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
       <Button
         className="addRecipeBtn"
         onClick={newRecipe}
-        bsStyle="primary"
       >Add recipe
       </Button>
 
@@ -60,7 +59,7 @@ function ModalPanel({ onSubmit, show, ingrs, name, toggle, clear }) {
 
 ModalPanel.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  show: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
   ingrs: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,

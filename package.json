@@ -2,6 +2,7 @@
   "name": "recipe-box",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://ramiropinol.github.io/recipe-box",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
@@ -12,10 +13,12 @@
     "toastr": "^2.1.2"
   },
   "devDependencies": {
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^7.0.0",
+    "react-addons-test-utils": "^15.5.1",
     "react-scripts": "0.9.5"
   },
   "scripts": {

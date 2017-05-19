@@ -2,14 +2,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #E2E3DF;
+  background-color: #7c50d9;
   text-align: center;
+  color: #fff;
 }
+/*claro #83bfae
+borde #9ecdc0*/
 
 header {
-  background-color: #515B5E;
+  background-image: url("../public/pattern.png");
   padding: 15px 0 5px 0;
-  color: #E2E3DF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
 }
 
 header h2 {
@@ -27,15 +30,41 @@ button {
 }
 
 .addRecipeBtn {
+  /*background-color: #262A26;*/
   margin: 10px auto;
+  /*border-color: #262A26;
+  color: #fff;*/
 }
 
-.panel-heading:hover {
-  background-color: #CAF200;
-}
+/*.addRecipeBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}*/
 
 .panel-group {
   margin-bottom: 10px; /* Space between panels */
+}
+
+.panel-group .panel {
+  border-radius: 8px;
+  background-color: #8a5ee7;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.panel-default {
+  border-color: #8a5ee7;
+  border-top-color: #9065ea;
+}
+
+.panel-default > .panel-heading {
+  background-color: #8a5ee7;
+  border-color: #8a5ee7;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.panel-heading:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .panel-title a {
@@ -44,6 +73,11 @@ button {
   margin: -10px -15px;
   text-decoration: none;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #936fdf;
 }
 
 .ingredients {
