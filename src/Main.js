@@ -27,7 +27,7 @@ class Main extends Component {
 
   onRecipeDelete(id) {
     deleteRecipe(id); // Delete recipe from localStorage
-    this.setState({ recipes: [...getRecipes()] });
+    return this.setState({ recipes: [...getRecipes()] });
   }
 
   // Function used to add a recipe. Both name and ingr should be strings
@@ -54,23 +54,19 @@ class Main extends Component {
   }
 
   toggleModalShow() {
-    this.setState({ showModal: !this.state.showModal });
+    return this.setState({ showModal: !this.state.showModal });
   }
 
   clearModalFields() {
-    this.setState({ modalNameVal: '', modalIngrVal: '' });
+    return this.setState({ modalNameVal: '', modalIngrVal: '' });
   }
 
   handleInputSubmit(event) {
     const [name, ingrs] = [event.target.name.value, event.target.ingredients.value];
     event.preventDefault();
 
-    // Check for empty fields
-    if (!name || !ingrs) {
-      toastr.warning('Empty field, nothing added.');
-
     // Check for unchanged info submit
-    } else if (name === this.state.modalNameVal && ingrs === this.state.modalIngrVal) {
+    if (name === this.state.modalNameVal && ingrs === this.state.modalIngrVal) {
       toastr.warning('No changes, nothing edited.');
 
     // If editing a recipe (modalNameVal & modalIngrVal != '')

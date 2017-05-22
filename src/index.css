@@ -80,6 +80,11 @@ button {
   border-top-color: #936fdf;
 }
 
+.alert {
+  margin: 0;
+  padding: 5px;
+}
+
 .ingredients {
   text-align: left;
 }
