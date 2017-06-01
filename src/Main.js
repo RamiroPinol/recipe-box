@@ -3,6 +3,7 @@ import toastr from 'toastr';
 import Header from './components/Header';
 import ModalPanel from './components/ModalPanel';
 import RecipesContainer from './components/RecipesContainer';
+import ConfirmPrompt from './components/ConfirmPrompt';
 import { getRecipes, addRecipe, deleteRecipe } from './storageAPI';
 
 class Main extends Component {

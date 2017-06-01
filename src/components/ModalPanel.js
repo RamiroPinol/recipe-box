@@ -56,10 +56,11 @@ class ModalPanel extends Component {
     return (
       <div>
         <Button
+          bsStyle="success"
           className="addRecipeBtn"
           onClick={this.newRecipe}
-        >Add recipe
-        </Button>
+        ><i className="glyphicon glyphicon-plus" aria-hidden="true" /> <b>Add recipe</b>
+          </Button>
 
         <Modal
           show={show}
