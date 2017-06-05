@@ -10,7 +10,7 @@ body {
 borde #9ecdc0*/
 
 header {
-  background-image: url("../public/pattern.png");
+  background-image: url("pattern.png");
   padding: 15px 0 5px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
 }
@@ -30,16 +30,27 @@ button {
 }
 
 .addRecipeBtn {
-  /*background-color: #262A26;*/
-  margin: 10px auto;
-  /*border-color: #262A26;
-  color: #fff;*/
+  margin: 20px auto;
 }
 
-/*.addRecipeBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+/* Dismiss button */
+.delete-button {
+  float: right;
+  position: relative;
+  bottom: 47px;
+  border: 0;
   color: #fff;
-}*/
+  font-size: 24px;
+  line-height: 20px;
+  padding: 0;
+  background-color: #8A5EE7;
+}
+
+.delete-button:hover {
+  background-color: transparent;
+  color: #f84949;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 255, 255, 0.5);
+}
 
 .panel-group {
   margin-bottom: 10px; /* Space between panels */
@@ -67,6 +78,10 @@ button {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.panel-heading:hover ~ .panel-collapse .delete-button {
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
 .panel-title a {
   display: block;
   padding: 10px 15px;
@@ -78,6 +93,11 @@ button {
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #936fdf;
+}
+
+.alert {
+  margin: 0;
+  padding: 5px;
 }
 
 .ingredients {

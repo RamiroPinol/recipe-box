@@ -6,21 +6,24 @@ function Recipe({ id, name, ingredients, deleteRecipe, editRecipe }) {
   return (
     <div className="col-xs-12 col-sm-6 col-md-4">
       <Accordion>
+
         <Panel header={name} eventKey={id}>
+
+          <Button
+            className="delete-button"
+            onClick={() => deleteRecipe(id)}
+          ><i className="glyphicon glyphicon-remove" aria-hidden="true" />
+          </Button>
+
           <div className="ingredients">
             <ul>
               {ingredients.map(ingr => <li key={`${id}${ingr}`}>{ingr}</li>)}
             </ul>
           </div>
           <Button
-            bsStyle="primary"
+            bsStyle="default"
             onClick={() => editRecipe(name, ingredients, id)}
-          >Edit
-          </Button>
-          <Button
-            bsStyle="danger"
-            onClick={() => deleteRecipe(id)}
-          >DELETE
+          ><i className="glyphicon glyphicon-pencil" aria-hidden="true" /> <b>Edit</b>
           </Button>
         </Panel>
       </Accordion>
