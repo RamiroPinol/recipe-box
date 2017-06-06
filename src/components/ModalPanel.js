@@ -9,11 +9,13 @@ class ModalPanel extends Component {
     this.state = {
       name: '',
       ingredients: '',
+      instructions: '',
     };
 
     this.newRecipe = this.newRecipe.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleIngrChange = this.handleIngrChange.bind(this);
+    this.handleInstructionsChange = this.handleInstructionsChange.bind(this);
     this.canBeSubmitted = this.canBeSubmitted.bind(this);
     this.clearRecipeValues = this.clearRecipeValues.bind(this);
   }
@@ -26,7 +28,7 @@ class ModalPanel extends Component {
 
   // Clears state to re-check new input
   clearRecipeValues() {
-    this.setState({ name: '', ingredients: '' });
+    this.setState({ name: '', ingredients: '', instructions: '' });
   }
 
   // Updates name state value
@@ -41,6 +43,12 @@ class ModalPanel extends Component {
     this.setState({ ingredients: ingrValue });
   }
 
+  // Updates instructions state value
+  handleInstructionsChange(event) {
+    const instrValue = event.target.value;
+    this.setState({ instructions: instrValue });
+  }
+
   // Check if entered input is valid
   canBeSubmitted() {
     return {
@@ -50,7 +58,7 @@ class ModalPanel extends Component {
   }
 
   render() {
-    const { onSubmit, show, ingrs, name } = this.props;
+    const { onSubmit, show, ingrs, name, instructions } = this.props;
     const validate = this.canBeSubmitted();
 
     return (
@@ -60,7 +68,7 @@ class ModalPanel extends Component {
           className="addRecipeBtn"
           onClick={this.newRecipe}
         ><i className="glyphicon glyphicon-plus" aria-hidden="true" /> <b>Add recipe</b>
-          </Button>
+        </Button>
 
         <Modal
           show={show}
@@ -98,6 +106,17 @@ class ModalPanel extends Component {
                   onChange={this.handleIngrChange}
                 />
                 <HelpBlock>Separate ingredients with commas</HelpBlock>
+
+                <FormGroup controlId="formControlInstructions">
+                  <ControlLabel>Instructions</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="instructions"
+                    defaultValue={instructions}
+                    placeholder="Enter recipe instructions"
+                    onChange={this.handleInstructionsChange}
+                  />
+                </FormGroup>
 
                 { !validate.ingredients && this.state.ingredients.length > 0 &&
                   <div className="alert alert-danger" role="alert">

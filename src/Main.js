@@ -3,7 +3,6 @@ import toastr from 'toastr';
 import Header from './components/Header';
 import ModalPanel from './components/ModalPanel';
 import RecipesContainer from './components/RecipesContainer';
-import ConfirmPrompt from './components/ConfirmPrompt';
 import { getRecipes, addRecipe, deleteRecipe } from './storageAPI';
 
 class Main extends Component {
@@ -15,6 +14,7 @@ class Main extends Component {
       showModal: false,
       modalNameVal: '',
       modalIngrVal: '',
+      modalInstrVal: '',
       editingRecipeId: '',
     };
 
@@ -32,11 +32,12 @@ class Main extends Component {
   }
 
   // Function used to add a recipe. Both name and ingr should be strings
-  onRecipeAdd(name, ingr) {
+  onRecipeAdd(name, ingr, instructions) {
     const recipeObj = {
       id: Date.now().toString(),
       name,
       ingredients: [...ingr.split(',').filter(igr => igr.length).map(igr => igr.trim())],
+      instructions,
     };
 
     addRecipe(recipeObj);
@@ -44,10 +45,11 @@ class Main extends Component {
   }
 
   // Function for set state when editing recipe.
-  onRecipeEdit(name, ingrsArray, id) {
+  onRecipeEdit(name, ingrsArray, id, instructions) {
     this.setState({
       modalNameVal: name,
       modalIngrVal: ingrsArray.join(),
+      modalInstrVal: instructions,
       editingRecipeId: id,
     });
 
@@ -59,11 +61,12 @@ class Main extends Component {
   }
 
   clearModalFields() {
-    return this.setState({ modalNameVal: '', modalIngrVal: '' });
+    return this.setState({ modalNameVal: '', modalIngrVal: '', modalInstrVal: '' });
   }
 
   handleInputSubmit(event) {
-    const [name, ingrs] = [event.target.name.value, event.target.ingredients.value];
+    const [name, ingrs, instructions] =
+      [event.target.name.value, event.target.ingredients.value, event.target.instructions.value];
     event.preventDefault();
 
     // Check for unchanged info submit
@@ -72,11 +75,11 @@ class Main extends Component {
 
     // If editing a recipe (modalNameVal & modalIngrVal != '')
     } else if (this.state.modalNameVal !== '' && this.state.modalIngrVal !== '') {
-      this.onRecipeAdd(name, ingrs); // Add new recipe
+      this.onRecipeAdd(name, ingrs, instructions); // Add new recipe
       this.onRecipeDelete(this.state.editingRecipeId); // Delete old recipe
       toastr.success('Recipe successfully edited!');
     } else {
-      this.onRecipeAdd(name, ingrs);
+      this.onRecipeAdd(name, ingrs, instructions);
       this.setState({ recipes: [...getRecipes()] }); // Get updated data
       toastr.success('New recipe added!');
     }
@@ -92,6 +95,7 @@ class Main extends Component {
           show={this.state.showModal}
           name={this.state.modalNameVal}
           ingrs={this.state.modalIngrVal}
+          instructions={this.state.modalInstrVal}
           toggle={this.toggleModalShow}
           clear={this.clearModalFields}
         />
