@@ -6,8 +6,6 @@ body {
   text-align: center;
   color: #fff;
 }
-/*claro #83bfae
-borde #9ecdc0*/
 
 header {
   background-image: url("pattern.png");
@@ -108,6 +106,7 @@ button {
 
 .ingredients {
   text-align: left;
+  width: 100%;
 }
 
 .ingredients .hide {

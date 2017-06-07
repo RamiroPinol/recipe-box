@@ -6,28 +6,31 @@ class Recipe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flipped: false,
-      buttonText: 'Directions',
+      flipped: false, // Used to toggle 'flipped' class on .panelData div.
+      buttonText: 'Directions', // Used to set view-button text.
     };
 
-    this.flip = this.flip.bind(this);
-    this.flipButtonText = this.flipButtonText.bind(this);
+    this.toggleFlippedState = this.toggleFlippedState.bind(this);
+    this.toggleButtonText = this.toggleButtonText.bind(this);
     this.flipper = this.flipper.bind(this);
   }
 
-  flip() {
+  // Funtion to toggle flipped state boolean.
+  toggleFlippedState() {
     this.setState({ flipped: !this.state.flipped });
   }
 
-  flipButtonText() {
+  // Toggles button text to match data displayed on recipe panel.
+  toggleButtonText() {
     this.setState({
       buttonText: this.state.buttonText === 'Directions' ? 'Ingredients' : 'Directions',
     });
   }
 
+  // Function to call both functions above in order to use it on the view button.
   flipper() {
-    this.flip();
-    this.flipButtonText();
+    this.toggleFlippedState();
+    this.toggleButtonText();
   }
 
   render() {
@@ -68,7 +71,7 @@ class Recipe extends Component {
 
             <Button
               bsStyle="default"
-              onClick={() => editRecipe(name, ingredients, id)}
+              onClick={() => editRecipe(name, ingredients, id, instructions)}
             ><i className="glyphicon glyphicon-pencil" aria-hidden="true" />
               <b> Edit</b>
             </Button>
