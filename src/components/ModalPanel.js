@@ -6,27 +6,36 @@ class ModalPanel extends Component {
   constructor(props) {
     super(props);
 
+    // State to validate correct input. Receives recipe info when editing.
     this.state = {
       name: '',
       ingredients: '',
+      instructions: '',
     };
 
     this.newRecipe = this.newRecipe.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleIngrChange = this.handleIngrChange.bind(this);
+    this.handleInstructionsChange = this.handleInstructionsChange.bind(this);
     this.canBeSubmitted = this.canBeSubmitted.bind(this);
-    this.clearRecipeValues = this.clearRecipeValues.bind(this);
   }
 
+  // Update state when props change (editing or adding a new recipe).
+  // TO CHECK: This is uselessly called when show (modal) prop change, it should do nothing.
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.state.props) {
+      this.setState({
+        name: nextProps.name,
+        ingredients: nextProps.ingrs,
+        instructions: nextProps.instructions,
+      });
+    }
+  }
+
+  // Show Modal and clear Main modal fields states.
   newRecipe() {
     this.props.toggle();
-    this.props.clear(); // Clear Main component name and ingr states
-    this.clearRecipeValues();
-  }
-
-  // Clears state to re-check new input
-  clearRecipeValues() {
-    this.setState({ name: '', ingredients: '' });
+    this.props.clear();
   }
 
   // Updates name state value
@@ -41,7 +50,13 @@ class ModalPanel extends Component {
     this.setState({ ingredients: ingrValue });
   }
 
-  // Check if entered input is valid
+  // Updates instructions state value
+  handleInstructionsChange(event) {
+    const instrValue = event.target.value;
+    this.setState({ instructions: instrValue });
+  }
+
+  // Check if entered input is valid. Name >= 3 chars long and >= 2 ingredients.
   canBeSubmitted() {
     return {
       name: this.state.name.length > 2,
@@ -50,7 +65,7 @@ class ModalPanel extends Component {
   }
 
   render() {
-    const { onSubmit, show, ingrs, name } = this.props;
+    const { onSubmit, show, ingrs, name, instructions } = this.props;
     const validate = this.canBeSubmitted();
 
     return (
@@ -59,8 +74,8 @@ class ModalPanel extends Component {
           bsStyle="success"
           className="addRecipeBtn"
           onClick={this.newRecipe}
-        ><i className="glyphicon glyphicon-plus" aria-hidden="true" /> <b>Add recipe</b>
-          </Button>
+        ><i className="glyphicon glyphicon-plus" aria-hidden="true" /> Add recipe
+        </Button>
 
         <Modal
           show={show}
@@ -105,8 +120,18 @@ class ModalPanel extends Component {
                   </div>
                 }
 
+                <FormGroup controlId="formControlInstructions">
+                  <ControlLabel>Instructions</ControlLabel>
+                  <FormControl
+                    type="text"
+                    componentClass="textarea"
+                    name="instructions"
+                    defaultValue={instructions}
+                    placeholder="Enter recipe instructions"
+                    onChange={this.handleInstructionsChange}
+                  />
+                </FormGroup>
               </FormGroup>
-
             </Modal.Body>
 
             <Modal.Footer>
@@ -133,6 +158,7 @@ ModalPanel.propTypes = {
   show: PropTypes.bool.isRequired,
   ingrs: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  instructions: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,
   clear: PropTypes.func.isRequired,
 };

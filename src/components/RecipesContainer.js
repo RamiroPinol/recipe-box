@@ -15,6 +15,7 @@ function RecipesContainer({ recipes, deleteRecipe, editRecipe }) {
             id={recipe.id}
             name={recipe.name}
             ingredients={recipe.ingredients}
+            instructions={recipe.instructions}
             deleteRecipe={deleteRecipe}
             editRecipe={editRecipe}
           />)}
