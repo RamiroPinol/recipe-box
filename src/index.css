@@ -1,20 +1,59 @@
+/*
+ * CONTENTS:
+ *
+ * BODY
+ *
+ * HEADER (35)
+ *   Header Div...............(Header main div).
+ *   Header main text.........(Header main text).
+ *   Header p text............(Header small text).
+ *
+ * BUTTONS (58)
+ *   Add recipe button.
+ *   Delete recipe button.
+ *
+ * RECIPES PANELS (99)
+ *   Panel container..........(Div that contains panel div).
+ *   Panel div................(Recipe panel).
+ *   Panel header.............(Panel header div).
+ *   Panel header <a>.........(Panel header text <a> tag).
+ *   Separator................(Border color between panel header and body).
+ *   Collapsible div..........(Recipe panel collapsible div).
+ *   Info container...........(Ingredients and Instructions container).
+ *   Ingredients div..........(Ingredients div and childs).
+ *   Instructions div..........(Instructions div).
+ *
+ * TOASTR ALERTS (207)
+ */
+
+
+/*------------------------------------*\
+  #GLOBALS AND BODY
+\*------------------------------------*/
+
 body {
+  background-color: #7c50d9;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background-color: #7c50d9;
   text-align: center;
-  color: #fff;
 }
+
+
+/*------------------------------------*\
+  #HEADER
+\*------------------------------------*/
 
 header {
   background-image: url("pattern.png");
-  padding: 15px 0 5px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  padding: 15px 0 5px 0;
 }
 
 header h2 {
   font-size: 34px;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -23,26 +62,33 @@ header p {
   margin: 10px 0 0 0;
 }
 
+
+
+/*------------------------------------*\
+  #BUTTONS
+\*------------------------------------*/
+
 button {
   margin: 0 2px;
 }
 
+/* Add recipe button */
 .addRecipeBtn {
   margin: 20px auto;
 }
 
-/* Dismiss button */
+/* Delete recipe button */
 .delete-button {
-  display: none;
-  position: absolute;
-  top: -32px;
-  right: 8px;
+  background-color: #8A5EE7;
   border: 0;
   color: #fff;
+  display: none;
   font-size: 24px;
   line-height: 20px;
   padding: 0;
-  background-color: #8A5EE7;
+  position: absolute;
+  right: 8px;
+  top: -32px;
 }
 
 .delete-button:hover {
@@ -51,25 +97,36 @@ button {
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
+/* This matches delete button background with parent color when hovering */
+.panel-heading:hover ~ .panel-collapse .delete-button {
+  background-color: rgba(0, 0, 0, 0.001);
+}
+
 .in .delete-button { /* Display delete button only when panel is open */
   display: block;
 }
 
+
+
+/*------------------------------------*\
+  #RECIPES PANELS
+\*------------------------------------*/
+
+/* Panel container */
 .panel-group {
   margin-bottom: 10px; /* Space between panels */
 }
 
+/* Panel div */
 .panel-group .panel {
-  border-radius: 8px;
   background-color: #8a5ee7;
+  border-color: #8a5ee7;
+  border-radius: 8px;
+  border-top-color: #9065ea;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.panel-default {
-  border-color: #8a5ee7;
-  border-top-color: #9065ea;
-}
-
+/* Panel header div */
 .panel-default > .panel-heading {
   background-color: #8a5ee7;
   border-color: #8a5ee7;
@@ -78,39 +135,58 @@ button {
 }
 
 .panel-heading:hover {
-  color: #66cc66;
   background-color: rgba(0, 0, 0, 0.2);
+  color: #66cc66;
 }
 
-.panel-heading:hover ~ .panel-collapse .delete-button {
-  background-color: rgba(0, 0, 0, 0.001);
-}
-
+/* Panel title anchor tag */
 .panel-title a {
-  display: block;
-  padding: 10px 15px;
-  margin: -10px -15px;
-  text-decoration: none;
   cursor: pointer;
-  font-weight: bold;
+  display: block;
+  margin: -10px -15px;
+  padding: 10px 15px;
+  text-decoration: none;
 }
 
+/* Separator: border color between header and body */
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #936fdf;
 }
 
-.alert {
-  margin: 0;
-  padding: 5px;
+/* Collapsible panel div */
+.panel-collapse {
+  -webkit-perspective: 800px;
+  perspective: 800px;
 }
 
+/* Ingredients and Instructions container */
+.panelData {
+  font-family: Helvetica, sans-serif;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.panelData.flipped { /* Panel flip effect */
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.panelData div { /* Common style for Ingredients and Instructions divs*/
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: #8A5EE7;
+}
+
+/* Ingredients div */
 .ingredients {
+  position: absolute;
   text-align: left;
   width: 100%;
 }
 
-.ingredients .hide {
-  display: none;
+.ingredients ul { /* Ingredients list */
+  columns: 2;
+  padding-left: 20px;
 }
 
 .ingredients-header {
@@ -118,39 +194,21 @@ button {
   text-align: center;
 }
 
-.instructions {
-  text-align: justify;
-  overflow: auto;
-}
-
-.instructions .show {
-  display: block;
-}
-
-.panel-collapse {
-  -webkit-perspective: 800px;
-  perspective: 800px;
-}
-
-.panelData {
-  height: 200px;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.panelData div {
-  background: #8A5EE7;
-  position: absolute;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
+/* Instructions div */
 .panelData .instructions {
   -webkit-transform: rotateY(180deg);
+  float: left;
+  text-align: justify;
   transform: rotateY(180deg);
 }
-.panelData.flipped {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+
+
+
+/*------------------------------------*\
+  #TOASTR ALERTS
+\*------------------------------------*/
+
+.alert {
+  margin: 0;
+  padding: 5px;
 }

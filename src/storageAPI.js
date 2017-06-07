@@ -18,7 +18,7 @@ const recipesData = [
     id: '1',
     name: 'Lentil Soup',
     ingredients: [
-      '1 onion, chopped',
+      '1 onion chopped',
       '2 cups dry lentils',
       '2 carrots diced',
       '2 stalks celery chopped',

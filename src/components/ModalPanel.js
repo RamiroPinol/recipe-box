@@ -74,7 +74,7 @@ class ModalPanel extends Component {
           bsStyle="success"
           className="addRecipeBtn"
           onClick={this.newRecipe}
-        ><i className="glyphicon glyphicon-plus" aria-hidden="true" /> <b>Add recipe</b>
+        ><i className="glyphicon glyphicon-plus" aria-hidden="true" /> Add recipe
         </Button>
 
         <Modal
