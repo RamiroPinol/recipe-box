@@ -136,13 +136,13 @@ class ModalPanel extends Component {
 
             <Modal.Footer>
 
-              <Button
+              <button
                 type="submit"
-                bsStyle="primary"
+                className={`btn btn-primary
+                  ${(validate.name && validate.ingredients) ? '' : 'disabled'}`}
                 onClick={this.props.toggle}
-                disabled={!(validate.name && validate.ingredients)}
               >Add Recipe
-              </Button>
+              </button>
 
               <Button bsStyle="danger" onClick={this.props.toggle}>Cancel</Button>
             </Modal.Footer>

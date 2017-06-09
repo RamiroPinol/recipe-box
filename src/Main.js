@@ -78,7 +78,6 @@ class Main extends Component {
       event.target.instructions.value];
 
     event.preventDefault();
-
     // Check for unchanged info submit. If nothing changed, no editing.
     if (name === this.state.modalNameVal
       && ingrs === this.state.modalIngrVal
