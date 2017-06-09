@@ -56,9 +56,9 @@ const recipesData = [
 
 export const SaveItem = (key, value) => {
   if (typeof value === 'object') {
-    storage[key] = JSON.stringify(value);
+    storage.setItem(key, JSON.stringify(value));
   } else {
-    storage[key] = value;
+    storage.setItem(key, value);
   }
 };
 
